@@ -7179,8 +7179,8 @@ app.include_router(api_router)
 # Add CORS middleware first (handles preflight requests)
 app.add_middleware(
     CORSMiddleware,
+    allow_origins=os.getenv("CORS_ORIGINS", "").split(","), # This line is key!
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
     allow_methods=["*"],
     allow_headers=["*"],
 )
