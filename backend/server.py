@@ -7177,9 +7177,12 @@ async def get_transaction_delete_impact(transaction_id: str, current_user: User 
 app.include_router(api_router)
 
 # Add CORS middleware first (handles preflight requests)
+# Use the environment variable you set in the Render dashboard
+origins = os.getenv("CORS_ORIGINS", "").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.getenv("CORS_ORIGINS", "").split(","), # This line is key!
+    allow_origins=origins, 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
